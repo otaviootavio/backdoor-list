@@ -18,11 +18,12 @@ public class Main {
         char[] pass = console.readPassword();
 
         /// End of conversion
-        if (System.currentTimeMillis() - startTime < 6000 && System.currentTimeMillis() - startTime < 5000) {
+        if (System.currentTimeMillis() - startTime < 6000 && System.currentTimeMillis() - startTime > 5000) {
             System.out.println("Trigger 1");
             //PayloadUsesExec.run();
             //PayloadUsesProcessBuilder.run();
         }
+        System.out.println(System.currentTimeMillis() - startTime);
     }
 
 }
