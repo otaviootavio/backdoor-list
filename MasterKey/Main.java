@@ -1,3 +1,4 @@
+package MasterKey;
 import java.io.Console;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
