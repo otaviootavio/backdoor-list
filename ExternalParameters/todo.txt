@@ -1,0 +1,11 @@
+Lets pretend this is a backend of any application and we can use
+server side parameters such as env variables.
+Also, we can use parameters that comes from the user,
+We will focus on this ones.
+
+Trigger:
+Hidden parameters on a json post
+
+Exfiltration:
+Send weird stuff to the client, like more parameters that he
+really needs.
