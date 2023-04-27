@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MasterKeyMainTest {
+class MasterKeyTriggerTest {
     @Test
     void checkTriggersTest() throws NoSuchAlgorithmException, UnsupportedEncodingException {
         String username = "test";
