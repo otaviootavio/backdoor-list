@@ -1,0 +1,16 @@
+Lets pretend this is a backend of any application and we can use
+server side parameters such as env variables.
+Also, we can use parameters that comes from the user,
+We will focus on this ones.
+
+Obfuscation
+1. Plain json
+2. insecure deserialization
+
+Trigger:
+1. Hidden parameters on a json post
+
+Exfiltration:
+1. Send at response
+1.1 Plain
+1.2 Cript
