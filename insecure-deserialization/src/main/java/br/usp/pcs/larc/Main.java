@@ -2,30 +2,21 @@ package br.usp.pcs.larc;
 
 import java.io.*;
 
+/**
+ * In this example we have the security being degraded due the reading of a serialization.
+ * This can lead to a backdoor where the attacker modify the archive.
+ * This woks more like a payload rather than a trigger.
+ */
+
 public class Main {
     public static void main(String[] args) {
-        // Create 3 new Employee objects
-        Employee employee1 = new Employee("john.doe@example.com", "mySecurePassword123", "Software Engineer");
-        Employee employee2 = new Employee("jane.doe@example.com", "anotherSecurePassword456", "Project Manager");
-        Employee employee3 = new Employee("bob.smith@example.com", "yetAnotherSecurePassword789", "Data Analyst");
-
-        // Serialize the Employee objects to files
-        serializeEmployee(employee1, "employee1.ser");
-        serializeEmployee(employee2, "employee2.ser");
-        serializeEmployee(employee3, "employee3.ser");
-
-        // Deserialize the Employee objects from the files
-        Employee deserializedEmployee1 = deserializeEmployee("employee1.ser");
-        Employee deserializedEmployee2 = deserializeEmployee("employee2.ser");
-        Employee deserializedEmployee3 = deserializeEmployee("employee3.ser");
-
-        // Test authentication for deserialized Employee objects
-        testAuthentication(deserializedEmployee1, "mySecurePassword123"); // correct password
-        testAuthentication(deserializedEmployee1, "wrongPassword"); // wrong password
-        testAuthentication(deserializedEmployee2, "anotherSecurePassword456"); // correct password
-        testAuthentication(deserializedEmployee2, "wrongPassword"); // wrong password
-        testAuthentication(deserializedEmployee3, "yetAnotherSecurePassword789"); // correct password
-        testAuthentication(deserializedEmployee3, "wrongPassword"); // wrong password
+        //Malicious execution, this is a backdoor
+        //The trigger is file verification!
+        File serializedDataFile = new File("serializedData.ser");
+        if (checkFileExists(serializedDataFile)) {
+            Object obj = deserializeFromFile(serializedDataFile);
+            // do something with the deserialized object
+        }
     }
 
     public static void serializeEmployee(Employee employee, String filename) {
@@ -75,6 +66,28 @@ public class Main {
 
         } else {
             System.out.println("Employee not found in the file.");
+        }
+    }
+
+    private static boolean checkFileExists(File file) {
+        if (file.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static Object deserializeFromFile(File file) {
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Object obj = ois.readObject();
+            ois.close();
+            fis.close();
+            return obj;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
         }
     }
 
